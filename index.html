@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mock Test 12 - 2Q New</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#d9f0d9}
+.page{max-width:430px;margin:0 auto;min-height:100dvh;background:#d9f0d9;position:relative;padding-bottom:140px}
+.topHeader{padding:16px;display:flex;justify-content:space-between;align-items:center;background:#fff}
+.logo{font-weight:900;font-size:20px;color:#0f3d1a}
+.mainCard{background:#fff;border:2px solid #86efac;border-radius:18px;padding:18px;margin:12px 16px}
+.badge{background:#dcfce7;border:1.5px solid #86efac;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:800;color:#14532d;display:inline-flex}
+.title{font-size:22px;font-weight:950;color:#0f3d1a;margin-top:10px}
+.info3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+.iBox{background:#e8f8e8;border:1.5px solid #86c68b;border-radius:14px;padding:10px 4px;text-align:center;font-size:12px}.iBox b{display:block;font-size:13px}
+.startWrap{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;padding:16px;border-radius:22px 22px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.12);z-index:999}
+.startBtn{width:100%;background:#16a34a;color:#fff;border:none;border-radius:14px;padding:18px;font-size:18px;font-weight:900;display:flex;justify-content:space-between}
+#testPage,#resultPage{display:none}
+.qCard{background:#fff;margin:10px 12px;border-radius:18px;padding:16px}
+.opt{border:2px solid #ddd;border-radius:12px;padding:12px;margin:8px 0;font-weight:600;cursor:pointer}.opt.sel{border-color:#16a34a;background:#dcfce7}
+.score{background:#0f5d2f;padding:22px 18px;display:flex;justify-content:space-between;color:#fff}
+.circle{width:96px;height:96px;background:#13924b;border:3px solid #fff;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.bar{background:#fff;margin:12px;border-radius:14px;padding:14px;display:flex;justify-content:space-between;font-weight:800;font-size:13px}
+.card{background:#fff;border-radius:16px;padding:16px;margin:14px 12px;box-shadow:0 4px 14px rgba(0,0,0,.07)}
+.exp{background:#fef3c7;border-radius:12px;padding:12px;margin-top:12px;display:flex;gap:10px;position:relative;padding-bottom:40px}
+.tagOk{position:absolute;right:10px;bottom:8px;background:#16a34a;color:#fff;padding:6px 12px;border-radius:18px;font-size:11px;font-weight:900}
+.tagWrong{position:absolute;right:10px;bottom:8px;background:#dc2626;color:#fff;padding:6px 12px;border-radius:18px;font-size:11px;font-weight:900}
+.btm{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;padding:12px;display:flex;gap:10px}
+.b1{flex:1;border:2px solid #0a4d1f;border-radius:12px;padding:14px;font-weight:900;background:#fff}
+.b2{flex:1;background:#0a4d1f;color:#fff;border:none;border-radius:12px;padding:14px;font-weight:900}
+</style>
+</head>
+<body>
+<div class="page" id="startPage">
+<div class="topHeader"><div class="logo">📖 Gyankshetra</div><div>🔔</div></div>
+<div class="mainCard"><div class="badge">📝 MOCK TEST 12 • 2Q NEW</div><div class="title">Bihar Special - 2Q Test</div><div class="info3"><div class="iBox">📋<br><b>2 Questions</b></div><div class="iBox">🕒<br><b>2 Min</b></div><div class="iBox">⚠️<br><b>Negative 1/3</b></div></div></div>
+</div>
+<div class="startWrap" id="sWrap"><button class="startBtn" onclick="startTest()"><span>START TEST</span><span>→</span></button></div>
+
+<div class="page" id="testPage">
+<div style="background:#16a34a;padding:14px 16px;color:#fff;font-weight:900;display:flex;justify-content:space-between"><span>🎓 Gyankshetra</span><span>⏱ <b id="timer">02:00</b></span></div>
+<div class="qCard"><div id="qCount" style="font-weight:900;color:#14532d">Q1 of 2</div><div id="qText" style="font-weight:700;margin:10px 0;font-size:16px"></div><div id="opts"></div></div>
+<div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;padding:10px;display:flex;gap:10px"><button onclick="prevQ()" style="flex:1;padding:14px;border-radius:12px;border:1px solid #ccc;font-weight:800">← Prev</button><button onclick="nextQ()" id="nBtn" style="flex:1;padding:14px;border-radius:12px;background:#16a34a;color:#fff;border:none;font-weight:800">Next →</button></div>
+</div>
+
+<div class="page" id="resultPage" style="background:#f3f4f6">
+<div style="background:#fff;padding:14px 16px;display:flex;justify-content:space-between;font-weight:900"><span>←</span><span>Test Result</span><span>↗</span></div>
+<div class="score"><div style="font-size:22px;font-weight:900">✅ Completed!</div><div class="circle"><b style="font-size:28px" id="sc">0/2</b><span style="font-size:11px" id="per">0% Score</span></div></div>
+<div class="bar"><span>Analysis • 2Q</span><span>☰</span></div>
+<div id="aList"></div>
+<div class="btm" id="aWrap" style="display:none"><button class="b1" onclick="location.reload()">REVIEW AGAIN</button><button class="b2" onclick="location.href='https://gyankshetra.github.io/'">CONTINUE →</button></div>
+</div>
+
+<script>
+const Q=[
+{q:"बिहार का राजकीय वृक्ष कौन सा है?\nState tree of Bihar?",o:["Peepal","Banyan","Neem","Sal","Not Attempted"],a:0,exp:"बिहार का राजकीय वृक्ष पीपल (Sacred Fig) है। इसे 2011 में घोषित किया गया।"},
+{q:"नालंदा विश्वविद्यालय की स्थापना किसने की?\nWho founded Nalanda University?",o:["Chandragupta I","Kumaragupta I","Ashoka","Harshavardhana","Not Attempted"],a:1,exp:"नालंदा विश्वविद्यालय की स्थापना गुप्त शासक कुमारगुप्त प्रथम ने 5वीं शताब्दी में की थी। यह प्राचीन भारत का प्रसिद्ध शिक्षा केंद्र था।"}
+];
+let cur=0,ans=Array(2).fill(null),time=120,tI;
+function startTest(){document.getElementById('startPage').style.display='none';document.getElementById('sWrap').style.display='none';document.getElementById('testPage').style.display='block';render();tI=setInterval(()=>{time--;let m=Math.floor(time/60),s=time%60;document.getElementById('timer').innerText=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;if(time<=0)submit();},1000);}
+function render(){document.getElementById('qCount').innerText=`Q${cur+1} of 2`;document.getElementById('qText').innerText=`Q${cur+1}. ${Q[cur].q}`;let h="";Q[cur].o.forEach((t,i)=>{h+=`<div class="${ans[cur]===i?'opt sel':'opt'}" onclick="choose(${i})">${String.fromCharCode(65+i)}. ${t}</div>`;});document.getElementById('opts').innerHTML=h;document.getElementById('nBtn').innerText=cur===1?"Submit →":"Next →";}
+function choose(i){ans[cur]=i;render();}
+function nextQ(){if(cur<1){cur++;render();}else submit();}
+function prevQ(){if(cur>0){cur--;render();}}
+function submit(){clearInterval(tI);let c=0;Q.forEach((q,i)=>{if(ans[i]===q.a)c++;});document.getElementById('testPage').style.display='none';let rp=document.getElementById('resultPage');rp.style.display='block';document.getElementById('sc').innerText=`${c}/2`;document.getElementById('per').innerText=`${c*50}% Score`;let html="";Q.forEach((q,i)=>{let ok=ans[i]===q.a;let u=ans[i]!==null?q.o[ans[i]]:"Not Attempted";html+=`<div class="card"><div><span style="background:#0a4d1f;color:#fff;padding:5px 10px;border-radius:8px;font-weight:900">Q${i+1}</span> <b>${q.q}</b></div><p style="margin-top:10px;color:#991b1b;font-weight:700;font-size:13px">Your answer: • ${u}</p><p style="margin-top:6px;color:#065f46;font-weight:800;font-size:13px">Correct answer: ✅ ${q.o[q.a]}</p><div class="exp"><span>💡</span><div style="font-size:12px"><b>Explanation:</b><br>${q.exp}</div><span class="${ok?'tagOk':'tagWrong'}">${ok?'✅ CORRECT':'❌ WRONG'}</span></div></div>`;});document.getElementById('aList').innerHTML=html;document.getElementById('aWrap').style.display='flex';window.scrollTo(0,0);}
+</script>
+</body>
+</html>
